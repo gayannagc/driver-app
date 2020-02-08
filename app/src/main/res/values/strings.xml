@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">DriverApp</string>
+    <string name="title_activity_driver_map">Map</string>
+    <string name="todo">TODO</string>
+    <string name="imageviewof2ndsign">imageviewof2ndsign</string>
+    <string name="volumecontroller">VolumeController</string>
+    <string name="logoutarrow">LogoutArrow</string>
+    <string name="dynamicsignviev3">DynamicSignViev3</string>
+    <string name="dynamicsignview2">DynamicSignView2</string>
+    <string name="dynamicsignview1">DynamicSignView1</string>
+    <string name="maignstaticsignview">MaignStaticSignView</string>
+
+</resources>
