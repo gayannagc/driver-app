@@ -7,6 +7,7 @@ import android.util.Log;
 
 import java.util.List;
 
+import static com.example.driverapp.DriverMapActivity.roadSignList;
 import static com.example.driverapp.DriverMapActivity.table1Db;
 
 
@@ -51,11 +52,13 @@ public class QuarryArea {
         Integer distance = 101;
         int n = 1;
 
-        Cursor res = table1Db.getAllData();
+
         long countTB1 = table1Db.getRoadSignCount();
         long counttemp = DriverMapActivity.tempTable.getRoadSignCount();
         if(countTB1>counttemp){
+            Cursor res = table1Db.getAllData();
             DriverMapActivity.tempTable.deleteAll();
+            roadSignList.clear();
             while (res.moveToNext()) {              //Add data to temp table
                 String Table_id = res.getString(0);
                 String area_id = res.getString(1);
@@ -67,9 +70,28 @@ public class QuarryArea {
                 n = n + 1;
                 System.out.println("inserted");
             }
+            UpdateArray();
+        }
+        if(roadSignList.size() < counttemp){
+            UpdateArray();
         }
 
+    }
 
+    private void UpdateArray(){
+        roadSignList.clear();
+        Cursor res = DriverMapActivity.tempTable.getAllData("tempTableA");
+        while (res.moveToNext()) {              //Add data to temp table
+//            String Table_id = res.getString(0);
+//            String Roadsign  = res.getString(1);
+//            String Longi = res.getString(2);
+//            String Lati = res.getString(3);
+//            String Distance = res.getString(4);
+//            String Heading = res.getString(5);//heading will push data to relevant database
+            roadSignList.add(new RoadSign(res.getString(0),res.getString(1),
+                    res.getString(2),res.getString(3),res.getString(5),res.getString(4)));
+            System.out.println("inserted");
+        }
     }
 
     private class LocationLoader extends AsyncTask<String, Void, List<List<String>>> {

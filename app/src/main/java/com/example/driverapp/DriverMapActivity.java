@@ -138,6 +138,9 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
     private List<ScanResult> results;
     private ArrayList<String> arrayList = new ArrayList<>();
     private ArrayAdapter adapter;
+
+    public static List<RoadSign> roadSignList = new ArrayList<>();
+
     Thread task;
     Thread ShowImage;
     Thread ShowImage2;
@@ -979,72 +982,41 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
     */
     private void getClosestRoadSign(Double heading, Integer area) {
 
-        long counter = tempTable.getRoadSignCount();
         float lowestdistance = 100;
-        int n = 1;
-        Integer TABLE_ID = 0;
-        String ROAD_SIGN = "";
-        String Temp_sign = "";
-        String Second_close = "";
-        Integer Sec_Table_Id = 0;
-        Integer Temp_tableId = 0;
-        String LONGI = "";
-        String LATI = "";
-        double DISTANCE = 0.0;
-        double FLAG = 0.0;
 
+        RoadSign targetSign = null;
+        RoadSign secondClosestSign = null;
 
-        while (n < (counter + 1)) {
-
-            Cursor res = tempTable.fetch(Integer.toString(n));
-            // Show all data
-
-            if (res.getCount() == 0) {
-                tempTable.deleteAll();                  //delete all entries in temporary database
-                Qarea.quarryarea(String.valueOf(area)); //get data from server
-                return;
-            }
-
-            while (res.moveToNext()) {
-                TABLE_ID = Integer.parseInt(res.getString(0));
-                ROAD_SIGN = res.getString(1);
-                LONGI = res.getString(2);
-                LATI = res.getString(3);
-                DISTANCE = parseDouble(res.getString(4));
-                FLAG = res.getDouble(5);        //heading
-            }
-
+        for (RoadSign roadSign : roadSignList) {
 
             try {
-                targetLocation.setLatitude(parseDouble(LATI));       //your co-ords of course
-                targetLocation.setLongitude(parseDouble(LONGI));
+                targetLocation.setLatitude(parseDouble(roadSign.getLatitude()));       //your co-ords of course
+                targetLocation.setLongitude(parseDouble(roadSign.getLongitude()));
             } catch (NumberFormatException e) {
-                showMessage("Data", LATI);
+                e.printStackTrace();
             }
+            float distanceInMeters = mLastLocation.distanceTo(targetLocation);
 
-            float distanceInMeters = mLastLocation.distanceTo(targetLocation);   //Calculating distances to the road signs
+            if (distanceInMeters <= roadSign.getDistance()) {                                     //Compare new distance to the RS with previous distance
+                if ((abs(heading - roadSign.getHeading()) < 20) ||
+                        (abs(heading - roadSign.getHeading()) > 340)) {
 
-            //mTime.setText(String.valueOf(tempID));
-            if (distanceInMeters <= DISTANCE) {                                     //Compare new distance to the RS with previous distance
-                if ((abs(heading - FLAG) < 20) || (abs(heading - FLAG) > 340)) {
                     if (distanceInMeters < lowestdistance && distanceInMeters > 10.0) {
                         System.out.println("yahooooooooooooooooooooooooo");
-                        Temp_sign = ROAD_SIGN;
-                        Temp_tableId = TABLE_ID;
+                        targetSign = roadSign;
                         lowestdistance = distanceInMeters;
                     } else if (lowestdistance < distanceInMeters && distanceInMeters < 20) {
-                        Second_close = ROAD_SIGN;
-                        Sec_Table_Id = TABLE_ID;
+                        secondClosestSign = roadSign;
                     }
                 }
             }
 
-            tempTable.updateData(TABLE_ID.toString(), ROAD_SIGN, LONGI, LATI, distanceInMeters, FLAG);
-            n = n + 1;
+            roadSign.setDistance(distanceInMeters);
         }
+
         if (lowestdistance < 100) {
             distanceTxt.setText(lowestdistance + "m Ahead D");
-            mTime.setText(Temp_sign);
+            mTime.setText(targetSign.getName());
 
         } else {
             distanceTxt.setText("More than 100m Ahead D");
@@ -1053,30 +1025,29 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
         //mSignImage1.setImageResource(images[Temp_sign]);
 
 
-        if ((drawableList.get(Temp_sign) != null) || (!Temp_sign.equals(""))) {
-            RoadSignToShow = Temp_sign;
-            signTxt.setText(signList.get(Temp_sign));
-            if (Temp_tableId != tempID) {
+        String targetSignName = (targetSign != null) ? targetSign.getName() : null;
+
+        if (targetSignName != null && (drawableList.get(targetSignName) != null)) {
+            RoadSignToShow = targetSignName;
+            signTxt.setText(signList.get(targetSignName));
+            if (targetSign.getId() != tempID) {
                 if (audio == 1) {
-                    ConvertTextToSpeech(signList.get(Temp_sign));
-                    tempID = Temp_tableId;
+                    ConvertTextToSpeech(signList.get(targetSignName));
+                    tempID = targetSign.getId();
                 }
             }
 
         } else {
             RoadSignToShow = "nosign";
-            mTime.setText(Temp_sign);
         }
-
         mSignImage2.setImageResource(drawableList.get(RoadSignToShow));
 
 
-        if ((drawableList.get(Second_close) != null) || (Second_close != "")) {
-            tempID2 = Sec_Table_Id;
+        if ((secondClosestSign != null) && (secondClosestSign.getName() != null) &&
+                (drawableList.get(secondClosestSign.getName()) != null)) {
+            tempID2 = secondClosestSign.getId();
             if (!tempID2.equals(tempID)) {
-                RoadSignToShow2 = Second_close;
-
-
+                RoadSignToShow2 = secondClosestSign.getName();
             }
         } else {
             RoadSignToShow2 = "nosign";
