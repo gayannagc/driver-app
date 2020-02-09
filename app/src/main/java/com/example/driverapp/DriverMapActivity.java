@@ -82,6 +82,8 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
     private TextView mTime, mHeading, mSpeed;
     private Boolean isLoggingout;           //Logout status variable
     public LatLng preLocation;          //a location variable
+    public LatLng currentLocation;
+    public LatLng targetSignLocation;
     private TextView signTxt;               //TextView for the Road sign
     //private TextView scanDetails;           //Scan Details on the bottom
     private TextView timer1, timer2, timer3;
@@ -992,19 +994,35 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
             try {
                 targetLocation.setLatitude(parseDouble(roadSign.getLatitude()));       //your co-ords of course
                 targetLocation.setLongitude(parseDouble(roadSign.getLongitude()));
+                targetSignLocation = new LatLng(parseDouble(roadSign.getLatitude()),parseDouble(roadSign.getLongitude()));
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
             float distanceInMeters = mLastLocation.distanceTo(targetLocation);
+            currentLocation = new LatLng(mLastLocation.getLatitude(),mLastLocation.getLongitude());
+            Double headingToSign = SphericalUtil.computeHeading(currentLocation,targetSignLocation);
+//Double head = SphericalUtil.computeHeading(preLocation, CurrentLocation);
+//        if (head < 0) {
+//            return head + 360;
+//        } else return head;
+            if (distanceInMeters <= roadSign.getDistance())
+            {                                     //Compare new distance to the RS with previous distance
+                System.out.println("first stage");
+                if ((abs(heading - roadSign.getHeading()) < 45) ||
+                        (abs(heading - roadSign.getHeading()) > 315))
+                {
+                    System.out.println("SecondStage");
+                    if (distanceInMeters < lowestdistance && distanceInMeters > 10.0)
+                    {
+                        System.out.println("Third stage");
+                        if((abs(heading - headingToSign) < 89) ||
+                                (abs(heading - headingToSign) > 271))
+                        {
+                            System.out.println("yahooooooooooooooooooooooooo");
+                            targetSign = roadSign;
+                            lowestdistance = distanceInMeters;
+                        }
 
-            if (distanceInMeters <= roadSign.getDistance()) {                                     //Compare new distance to the RS with previous distance
-                if ((abs(heading - roadSign.getHeading()) < 20) ||
-                        (abs(heading - roadSign.getHeading()) > 340)) {
-
-                    if (distanceInMeters < lowestdistance && distanceInMeters > 10.0) {
-                        System.out.println("yahooooooooooooooooooooooooo");
-                        targetSign = roadSign;
-                        lowestdistance = distanceInMeters;
                     } else if (lowestdistance < distanceInMeters && distanceInMeters < 20) {
                         secondClosestSign = roadSign;
                     }
@@ -1031,6 +1049,7 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
             RoadSignToShow = targetSignName;
             signTxt.setText(signList.get(targetSignName));
             if (targetSign.getId() != tempID) {
+                Log.i("OH Id changed",String.valueOf(targetSign.getId()));
                 if (audio == 1) {
                     ConvertTextToSpeech(signList.get(targetSignName));
                     tempID = targetSign.getId();
@@ -1044,7 +1063,8 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
 
 
         if ((secondClosestSign != null) && (secondClosestSign.getName() != null) &&
-                (drawableList.get(secondClosestSign.getName()) != null)) {
+                (drawableList.get(secondClosestSign.getName()) != null))
+        {
             tempID2 = secondClosestSign.getId();
             if (!tempID2.equals(tempID)) {
                 RoadSignToShow2 = secondClosestSign.getName();
