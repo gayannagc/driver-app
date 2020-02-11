@@ -4,10 +4,10 @@
 
     <uses-sdk
         android:minSdkVersion="20"
-        android:targetSdkVersion="28" />
+        android:targetSdkVersion="29" />
 
     <instrumentation
-        android:name="android.support.test.runner.AndroidJUnitRunner"
+        android:name="androidx.test.runner.AndroidJUnitRunner"
         android:functionalTest="false"
         android:handleProfiling="false"
         android:label="Tests for com.example.driverapp"

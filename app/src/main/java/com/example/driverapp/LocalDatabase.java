@@ -1,23 +1,18 @@
 package com.example.driverapp;
 
-import android.content.Context;
+
 import android.content.Intent;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.app.AlertDialog;
 import android.database.Cursor;
 import android.view.Menu;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.util.HashSet;
-import java.util.Set;
+import androidx.appcompat.app.AppCompatActivity;
+
 
 public class LocalDatabase extends AppCompatActivity {
     DatabaseHelper myDb;
