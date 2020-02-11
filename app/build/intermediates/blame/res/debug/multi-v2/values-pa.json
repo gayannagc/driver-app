@@ -4,6 +4,23 @@
             "outputFile": "/home/fyp19/Desktop/FYP_Danuka/finalApp/DriverApp/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-pa/values-pa.xml",
             "map": [
                 {
+                    "source": "/home/fyp19/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0-rc02.aar/68de088439f5b7ba2f3d29491cb61af6/res/values-pa/values-pa.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "48",
+                        "startColumns": "4",
+                        "startOffsets": "5595",
+                        "endColumns": "100",
+                        "endOffsets": "5691"
+                    }
+                },
+                {
                     "source": "/home/fyp19/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/f1d922f5e86be7e0a543f5e28156b9da/res/values-pa/values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
@@ -18,23 +35,6 @@
                         "startOffsets": "2759,2868,3073,3205,3316,3522,3653,3796,4139,4360,4471,4675,4809,5021,5212,5308,5404",
                         "endColumns": "108,204,131,110,205,130,142,132,220,110,203,133,211,190,95,95,110",
                         "endOffsets": "2863,3068,3200,3311,3517,3648,3791,3924,4355,4466,4670,4804,5016,5207,5303,5399,5510"
-                    }
-                },
-                {
-                    "source": "/home/fyp19/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.2.0.aar/0b02f2dec8afd407b3ba2a8b67996e34/res/values-pa/values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "247",
-                        "endColumns": "209",
-                        "endOffsets": "456"
-                    },
-                    "to": {
-                        "startLines": "37",
-                        "startColumns": "4",
-                        "startOffsets": "3929",
-                        "endColumns": "209",
-                        "endOffsets": "4134"
                     }
                 },
                 {
@@ -55,20 +55,20 @@
                     }
                 },
                 {
-                    "source": "/home/fyp19/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/a1317701c45280046309792e74569a11/res/values-pa/values-pa.xml",
+                    "source": "/home/fyp19/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.0.1.aar/3f5bf6d14995d62e0b9d6892cb5e7ec8/res/values-pa/values.xml",
                     "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "247",
+                        "endColumns": "209",
+                        "endOffsets": "456"
                     },
                     "to": {
-                        "startLines": "48",
+                        "startLines": "37",
                         "startColumns": "4",
-                        "startOffsets": "5595",
-                        "endColumns": "100",
-                        "endOffsets": "5691"
+                        "startOffsets": "3929",
+                        "endColumns": "209",
+                        "endOffsets": "4134"
                     }
                 }
             ]

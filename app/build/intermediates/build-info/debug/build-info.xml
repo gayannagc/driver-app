@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <instant-run
-    abi="arm64-v8a,armeabi-v7a,armeabi"
+    abi="armeabi-v7a,armeabi"
     api-level="28"
     build-mode="FULL"
-    density="420dpi"
+    density="xhdpi"
     format="10"
     plugin-version="3.3.0"
-    timestamp="1581268479886"
+    timestamp="1581414048072"
     token="-6529690514105778692"
     verifier="FULL_BUILD_REQUESTED" >
 
     <task
         name="javac"
-        duration="0" />
+        duration="635" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="0" />
+        duration="27" />
     <task
         name="verifier"
-        duration="0" />
+        duration="23" />
 
     <artifact
-        location="/home/fyp19/Desktop/FYP_Danuka/finalApp/DriverApp/app/build/intermediates/resources/instant-run/debug/resources-debug.apk"
+        location="/home/fyp19/Desktop/FYP_Danuka/finalApp/DriverApp/app/build/intermediates/split-apk/debug/slices/slice_1.apk"
         type="SPLIT" />
     <artifact
         location="/home/fyp19/Desktop/FYP_Danuka/finalApp/DriverApp/app/build/intermediates/split-apk/debug/slices/slice_7.apk"
@@ -33,13 +33,16 @@
         location="/home/fyp19/Desktop/FYP_Danuka/finalApp/DriverApp/app/build/intermediates/split-apk/debug/slices/slice_6.apk"
         type="SPLIT" />
     <artifact
-        location="/home/fyp19/Desktop/FYP_Danuka/finalApp/DriverApp/app/build/intermediates/split-apk/debug/slices/slice_8.apk"
-        type="SPLIT" />
-    <artifact
         location="/home/fyp19/Desktop/FYP_Danuka/finalApp/DriverApp/app/build/intermediates/split-apk/debug/dep/dependencies.apk"
         type="SPLIT" />
     <artifact
+        location="/home/fyp19/Desktop/FYP_Danuka/finalApp/DriverApp/app/build/intermediates/split-apk/debug/slices/slice_8.apk"
+        type="SPLIT" />
+    <artifact
         location="/home/fyp19/Desktop/FYP_Danuka/finalApp/DriverApp/app/build/intermediates/split-apk/debug/slices/slice_9.apk"
+        type="SPLIT" />
+    <artifact
+        location="/home/fyp19/Desktop/FYP_Danuka/finalApp/DriverApp/app/build/intermediates/resources/instant-run/debug/resources-debug.apk"
         type="SPLIT" />
     <artifact
         location="/home/fyp19/Desktop/FYP_Danuka/finalApp/DriverApp/app/build/intermediates/split-apk/debug/slices/slice_4.apk"
@@ -57,18 +60,15 @@
         location="/home/fyp19/Desktop/FYP_Danuka/finalApp/DriverApp/app/build/intermediates/split-apk/debug/slices/slice_2.apk"
         type="SPLIT" />
     <artifact
-        location="/home/fyp19/Desktop/FYP_Danuka/finalApp/DriverApp/app/build/intermediates/split-apk/debug/slices/slice_1.apk"
-        type="SPLIT" />
-    <artifact
         location="/home/fyp19/Desktop/FYP_Danuka/finalApp/DriverApp/app/build/intermediates/instant-run-apk/debug/app-debug.apk"
         type="SPLIT_MAIN" />
 
     <build
         build-mode="FULL"
-        timestamp="1581268479886"
+        timestamp="1581414048072"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
-            location="/home/fyp19/Desktop/FYP_Danuka/finalApp/DriverApp/app/build/intermediates/resources/instant-run/debug/resources-debug.apk"
+            location="/home/fyp19/Desktop/FYP_Danuka/finalApp/DriverApp/app/build/intermediates/split-apk/debug/slices/slice_1.apk"
             type="SPLIT" />
         <artifact
             location="/home/fyp19/Desktop/FYP_Danuka/finalApp/DriverApp/app/build/intermediates/split-apk/debug/slices/slice_7.apk"
@@ -77,13 +77,16 @@
             location="/home/fyp19/Desktop/FYP_Danuka/finalApp/DriverApp/app/build/intermediates/split-apk/debug/slices/slice_6.apk"
             type="SPLIT" />
         <artifact
-            location="/home/fyp19/Desktop/FYP_Danuka/finalApp/DriverApp/app/build/intermediates/split-apk/debug/slices/slice_8.apk"
-            type="SPLIT" />
-        <artifact
             location="/home/fyp19/Desktop/FYP_Danuka/finalApp/DriverApp/app/build/intermediates/split-apk/debug/dep/dependencies.apk"
             type="SPLIT" />
         <artifact
+            location="/home/fyp19/Desktop/FYP_Danuka/finalApp/DriverApp/app/build/intermediates/split-apk/debug/slices/slice_8.apk"
+            type="SPLIT" />
+        <artifact
             location="/home/fyp19/Desktop/FYP_Danuka/finalApp/DriverApp/app/build/intermediates/split-apk/debug/slices/slice_9.apk"
+            type="SPLIT" />
+        <artifact
+            location="/home/fyp19/Desktop/FYP_Danuka/finalApp/DriverApp/app/build/intermediates/resources/instant-run/debug/resources-debug.apk"
             type="SPLIT" />
         <artifact
             location="/home/fyp19/Desktop/FYP_Danuka/finalApp/DriverApp/app/build/intermediates/split-apk/debug/slices/slice_4.apk"
@@ -99,9 +102,6 @@
             type="SPLIT" />
         <artifact
             location="/home/fyp19/Desktop/FYP_Danuka/finalApp/DriverApp/app/build/intermediates/split-apk/debug/slices/slice_2.apk"
-            type="SPLIT" />
-        <artifact
-            location="/home/fyp19/Desktop/FYP_Danuka/finalApp/DriverApp/app/build/intermediates/split-apk/debug/slices/slice_1.apk"
             type="SPLIT" />
         <artifact
             location="/home/fyp19/Desktop/FYP_Danuka/finalApp/DriverApp/app/build/intermediates/instant-run-apk/debug/app-debug.apk"

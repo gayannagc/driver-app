@@ -21,23 +21,6 @@
                     }
                 },
                 {
-                    "source": "/home/fyp19/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/a1317701c45280046309792e74569a11/res/values-az/values-az.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
-                    },
-                    "to": {
-                        "startLines": "48",
-                        "startColumns": "4",
-                        "startOffsets": "5638",
-                        "endColumns": "100",
-                        "endOffsets": "5734"
-                    }
-                },
-                {
                     "source": "/home/fyp19/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/f1d922f5e86be7e0a543f5e28156b9da/res/values-az/values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
@@ -55,7 +38,7 @@
                     }
                 },
                 {
-                    "source": "/home/fyp19/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.2.0.aar/0b02f2dec8afd407b3ba2a8b67996e34/res/values-az/values.xml",
+                    "source": "/home/fyp19/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.0.1.aar/3f5bf6d14995d62e0b9d6892cb5e7ec8/res/values-az/values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
@@ -69,6 +52,23 @@
                         "startOffsets": "3990",
                         "endColumns": "220",
                         "endOffsets": "4206"
+                    }
+                },
+                {
+                    "source": "/home/fyp19/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0-rc02.aar/68de088439f5b7ba2f3d29491cb61af6/res/values-az/values-az.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "48",
+                        "startColumns": "4",
+                        "startOffsets": "5638",
+                        "endColumns": "100",
+                        "endOffsets": "5734"
                     }
                 }
             ]

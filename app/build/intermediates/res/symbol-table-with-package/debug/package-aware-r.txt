@@ -1042,7 +1042,6 @@ id signView2
 id signView3
 id signupPassword
 id spacer
-id speed
 id split_action_bar
 id spread
 id spread_inside

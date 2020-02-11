@@ -49,6 +49,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.maps.android.SphericalUtil;
 
@@ -79,7 +80,7 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
     LocationRequest mLocationRequest;       //Location request variable
 
     private ImageView mLogout;                 //Logout button
-    private TextView mTime, mHeading, mSpeed;
+    private TextView mTime, mHeading;
     private Boolean isLoggingout;           //Logout status variable
     public LatLng preLocation;          //a location variable
     public LatLng currentLocation;
@@ -110,13 +111,8 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
 
     public double GeneralHeading = 0.0;
     public double GeneranHeading2 = 0.0;
-    public int k = 0;
     private String preShout = "";
     private String Shout = "";
-//    public double h = 0.0;
-//    public double headi = 0.0;
-//    public double htm1 = 0.0;
-//    public double htm2 = 0.0;
 
     public double hL = 0.0;
     public double headiL = 0.0;
@@ -129,12 +125,6 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
     public Integer speed = 0;
     Location targetLocation = new Location("");         //provider name is unnecessary
 
-//    //Location Permission
-//    private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
-//    private static final String COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
-//    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
-
-
     //WiFi Scanning
     private WifiManager wifiManager;
     private List<ScanResult> results;
@@ -146,7 +136,6 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
     Thread task;
     Thread ShowImage;
     Thread ShowImage2;
-    Thread Logout;
 
     //SSID Decryption
     double beacontime, beaconhead;
@@ -182,7 +171,6 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
         mSignImage2 = (ImageView) findViewById(R.id.imageView2);
         mTime = (TextView) findViewById(R.id.time);
         mHeading = (TextView) findViewById(R.id.head);
-        mSpeed = findViewById(R.id.speed);
         imageView2 = (ImageView) findViewById(R.id.audio);
         signTxt = findViewById(R.id.signTxt);
         timer1 = findViewById(R.id.timer1);
@@ -276,27 +264,19 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
             }
         }
 
-
-        //Initialize area data
-
-        Logout = new Thread(new Runnable() {
+        mLogout.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
-
-                mLogout.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        isLoggingout = true;
-                        Intent intent = new Intent(DriverMapActivity.this, MainActivity.class);
-                        System.out.println("success");
-                        startActivity(intent);
-                        finish();
-                        return;
-                    }
-                });
+            public void onClick(View v) {
+                isLoggingout = true;
+                Intent intent = new Intent(DriverMapActivity.this, MainActivity.class);
+                System.out.println("success");
+                startActivity(intent);
+                finish();
+                return;
             }
         });
 
+        //Initialize area data
 
         ShowImage = new Thread(new Runnable() {
             @Override
@@ -404,8 +384,7 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
         // get the angle around the z-axis rotated
         double degree = Math.round(event.values[0]);
         compassH = degree;
-        mSpeed.setText(String.valueOf(compassH));
-        //lblheading.setText(String.valueOf(degree) + " degrees");
+
 
     }
 
@@ -985,7 +964,7 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
     private void getClosestRoadSign(Double heading, Integer area) {
 
         float lowestdistance = 100;
-
+        float lowestdistance2 = 100;
         RoadSign targetSign = null;
         RoadSign secondClosestSign = null;
 
@@ -1001,30 +980,34 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
             float distanceInMeters = mLastLocation.distanceTo(targetLocation);
             currentLocation = new LatLng(mLastLocation.getLatitude(),mLastLocation.getLongitude());
             Double headingToSign = SphericalUtil.computeHeading(currentLocation,targetSignLocation);
-//Double head = SphericalUtil.computeHeading(preLocation, CurrentLocation);
-//        if (head < 0) {
-//            return head + 360;
-//        } else return head;
+
+            if (headingToSign < 0) {
+                headingToSign =  headingToSign + 360;
+            }
+
             if (distanceInMeters <= roadSign.getDistance())
             {                                     //Compare new distance to the RS with previous distance
-                System.out.println("first stage");
-                if ((abs(heading - roadSign.getHeading()) < 45) ||
-                        (abs(heading - roadSign.getHeading()) > 315))
+                if ((abs(heading - headingToSign) < 89) ||
+                    (abs(heading - headingToSign) > 271))
                 {
-                    System.out.println("SecondStage");
-                    if (distanceInMeters < lowestdistance && distanceInMeters > 10.0)
+                    if ((abs(heading - roadSign.getHeading()) < 45) ||
+                            (abs(heading - roadSign.getHeading()) > 315))
                     {
-                        System.out.println("Third stage");
-                        if((abs(heading - headingToSign) < 89) ||
-                                (abs(heading - headingToSign) > 271))
+                        if(distanceInMeters < lowestdistance && distanceInMeters > 5.0)
                         {
                             System.out.println("yahooooooooooooooooooooooooo");
                             targetSign = roadSign;
                             lowestdistance = distanceInMeters;
-                        }
+                        }else if (lowestdistance < distanceInMeters && distanceInMeters < 100)
+                        {
+                            if(distanceInMeters < lowestdistance2 && distanceInMeters > 5.0)
+                            {
+                                System.out.println("yahooooooooooooooooooooooooo2222222222222");
+                                secondClosestSign = roadSign;
+                                lowestdistance2 = distanceInMeters;
+                            }
 
-                    } else if (lowestdistance < distanceInMeters && distanceInMeters < 20) {
-                        secondClosestSign = roadSign;
+                        }
                     }
                 }
             }
@@ -1110,20 +1093,20 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
     }
 
 
-//    private void updateCameraBearing(GoogleMap googleMap, float bearing) {
-//        if ( googleMap == null) return;
-//        CameraPosition camPos = CameraPosition
-//                .builder(
-//                        googleMap.getCameraPosition() // current Camera
-//                )
-//                .bearing(bearing)
-//                .build();
-//        LatLng latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-//        mMap.animateCamera(CameraUpdateFactory.zoomTo(17)); //zoom level
-//        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(camPos));
-//
-//    }
+    private void updateCameraBearing(GoogleMap googleMap, float bearing) {
+        if ( googleMap == null) return;
+        CameraPosition camPos = CameraPosition
+                .builder(
+                        googleMap.getCameraPosition() // current Camera
+                )
+                .bearing(bearing)
+                .build();
+        LatLng latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(17)); //zoom level
+        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(camPos));
+
+    }
 
     @Override
     protected void onDestroy() {
@@ -1256,8 +1239,8 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(17)); //zoom level
-        mTime.setText(String.valueOf(k));
         GeneralHeading = getHeadingL();
+        updateCameraBearing(mMap,(float) GeneralHeading);
         GeneranHeading2 = GeneralHeading;
         preLocation = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude()); //Update current value to get next direction
 
@@ -1265,7 +1248,6 @@ public class DriverMapActivity extends FragmentActivity implements OnMapReadyCal
                 +","+ String.valueOf(latLng.longitude)  + " Thread "+ Thread.currentThread().getId());
 
         getAreaAppendToTemp();
-        k = k+1;
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions

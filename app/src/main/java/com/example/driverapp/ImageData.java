@@ -184,6 +184,7 @@ public class ImageData {
         signList.put("rss05","Speed limit, fifty kilometers per hour");
         signList.put("a","Zebra crossing ahead");
 
+        //static
         signList.put("dws_01","Left Bend Ahead");
         signList.put("dws_02","Right Bend Ahead");
         signList.put("dws_03","Double Bend to Left Ahead");
@@ -268,11 +269,11 @@ public class ImageData {
         signList.put("rss_02","Height Limited");
         signList.put("rss_03","Weight limited");
         signList.put("rss_04","Weight limited on one axel");
-        signList.put("rss_05","Speed Limit, 50 kilometers per hours");
-        signList.put("rss_06","Speed Limit, 70 kilometers per hours");
-        signList.put("rss_07","Speed Limit, 60 kilometers per hours");
-        signList.put("rss_08","Speed Limit, 40 kilometers per hours");
-        signList.put("rss_09","Speed Limit, 30 kilometers per hours");
+        signList.put("rss_05","Speed Limit, 50 kilometers per hour");
+        signList.put("rss_06","Speed Limit, 70 kilometers per hour");
+        signList.put("rss_07","Speed Limit, 60 kilometers per hour");
+        signList.put("rss_08","Speed Limit, 40 kilometers per hour");
+        signList.put("rss_09","Speed Limit, 30 kilometers per hour");
         signList.put("rss_10","End of Speed limit");
 
 
