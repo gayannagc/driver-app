@@ -436,6 +436,7 @@ color foreground_material_dark
 color foreground_material_light
 color highlighted_text_material_dark
 color highlighted_text_material_light
+color ic_launcher_background_app
 color material_blue_grey_800
 color material_blue_grey_900
 color material_blue_grey_950
@@ -873,6 +874,7 @@ drawable rss_10
 drawable sign_in_button
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
+drawable traffic_light
 drawable vehicle_to_vehicle
 drawable volume_off
 drawable volume_up
@@ -1142,7 +1144,10 @@ layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
 layout support_simple_spinner_dropdown_item
 layout text_bubble
+mipmap app_iamge
+mipmap app_iamge_round
 mipmap ic_launcher
+mipmap ic_launcher_foreground_app
 mipmap ic_launcher_round
 string abc_action_bar_home_description
 string abc_action_bar_up_description
